@@ -16,7 +16,10 @@ const recommendationRoutes = require('./routes/recommendation.routes');
 const adminRoutes = require('./routes/admin.routes');
 
 connectDB();
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://ed7fe875-10fc-4d3e-83a1-15c9f6b14242-00-30yes7atmxijc.sisko.replit.dev'],
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
