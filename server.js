@@ -16,7 +16,14 @@ const recommendationRoutes = require('./routes/recommendation.routes');
 const adminRoutes = require('./routes/admin.routes');
 
 connectDB();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',  // For local development
+    'https://snapserve.vercel.app',  // Replace with your actual Vercel URL
+    'https://your-replit-url.replit.dev'  // Replace with your actual Replit URL
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -33,7 +40,11 @@ app.use('/api/admin', adminRoutes);
 
 const io = initSocket(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: [
+      'http://localhost:5173',  // For local development
+      'https://snapserve.vercel.app',  // Replace with your actual Vercel URL
+      'https://your-replit-url.replit.dev'  // Replace with your actual Replit URL
+    ],
     methods: ['GET', 'POST'],
     credentials: true
   }
